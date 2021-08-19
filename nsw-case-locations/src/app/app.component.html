@@ -1,0 +1,39 @@
+<mat-toolbar color="primary">
+  <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button> -->
+  <span><a href="/" style="color:#FFF;text-decoration:none;">Covid Near Me</a></span>
+  <span class="example-spacer"></span>
+  <!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>share</mat-icon>
+  </button> -->
+</mat-toolbar>
+
+
+<router-outlet></router-outlet>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        Made with  <mat-icon aria-hidden="false" aria-label="Address" style="font-size:18px">volunteer_activism</mat-icon>
+       by <a href="https://twitter.com/digitalmomentum">David Sheiles from Digital Momentum</a>
+      </div>
+
+      <div class="col-md-6" style="text-align: right;">
+        <a routerLink="/Disclaimer">Disclaimer</a>&nbsp;
+        <a routerLink="/Privacy">Privacy</a>&nbsp;
+        <a routerLink="/Sources">Data Sources</a>
+      </div>
+    </div>
+    <div class="row" style="margin-top:10px;">
+      <div class="col-md-12" style="text-align: center;">
+        &copy; 2021 Digital Momentum
+        </div>
+      </div>
+  </div>
+</footer>

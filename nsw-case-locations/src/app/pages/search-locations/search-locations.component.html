@@ -1,0 +1,143 @@
+
+<div class="container" >
+    <div style="padding:30px">
+    <h1>Search NSW COVID-19 case locations closest to you.</h1>
+    <p>The search uses live data directly from the <a href="https://data.nsw.gov.au/nsw-covid-19-data/case-locations" target="_blank">NSW Government</a>, showing locations with their distance from you.</p>
+        <h3>Filters:</h3>
+    
+    <mat-form-field appearance="fill" style="margin-right:10px;">
+      <mat-label>Radius</mat-label>
+      <mat-select [(value)]="radius" (selectionChange)="applyFilter()">
+        <mat-option value="5">5km</mat-option>
+        <mat-option value="10">10km</mat-option>
+        <mat-option value="15">15km</mat-option>
+        <mat-option value="20">20km</mat-option>
+        <mat-option value="25">25km</mat-option>
+        <mat-option value="30">30km</mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill" style="margin-right:10px;">
+      <mat-label>Sort By</mat-label>
+      <mat-select [(value)]="sortBy">
+        <mat-option [value]="{type: 'Distance', reverse: false}">Distance</mat-option>
+        <mat-option [value]="{type: 'Date', reverse: true}">Exposure Date</mat-option>
+        <mat-option [value]="{type: 'LastUpdatedDate', reverse: true}">Latest Updates</mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    
+    <mat-form-field appearance="fill" style="margin-right:10px;">
+      <mat-label>Search Type</mat-label>
+      <mat-select [(value)]="searchType">
+        <mat-option value="myLocation">Use My Location</mat-option>
+        <mat-option value="postcode">Postcode</mat-option>
+        <!-- <mat-option value="Suburb">Suburb</mat-option> -->
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" *ngIf="searchType=='myLocation'" (click)="onGpsSearch()">Search My Location</button>
+    
+    <mat-form-field class="example-full-width" appearance="fill"  *ngIf="searchType=='postcode'">
+      <mat-label *ngIf="!selectedPostcode">Postcode</mat-label>
+      <mat-label *ngIf="selectedPostcode">Postcode: {{selectedPostcode.locality}}</mat-label>
+      <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onPostcodeSelected($event.option.value)">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option" >
+          {{option.locality}} {{option.postcode}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    
+    
+    <!-- <span *ngIf="selectedPostcode">{{selectedPostcode.value.locality}}</span> -->
+    
+    
+    <div *ngIf="currentLat==0 && locationsFiltered.length == 0" class="alert info">Click "Search my Location" or select a postcode to search for local covid cases</div>
+    <div *ngIf="currentLat!=0 && locationsFiltered.length == 0" class="alert info">No locations found within {{radius}}km</div>
+    
+    
+    <div class="locationPanels">
+    
+      <mat-expansion-panel *ngFor="let element of locationsFiltered | orderBy: sortBy.type : sortBy.reverse">
+        <mat-expansion-panel-header style="height:auto;">
+         
+          <div>
+          <h2>{{element.Venue}}</h2>
+    
+          <div style="float: right;">{{element.Distance | number:'1.1-1'}}km away<br/>{{element.LastUpdatedDate  | dateAgo}}</div>
+          <div style="width:50%">{{element.Suburb}}<br/>
+            {{element.Date | date : "EEE, d MMM"}}<br/>{{element.Time}} 
+          </div>
+        </div>
+          
+        </mat-expansion-panel-header>
+        <mat-divider></mat-divider>
+    <p style="margin-top:10px;">
+        <a [href]="element.getMapLink()" target="_blank">
+         
+          <mat-icon aria-hidden="false" aria-label="Address" style="float:left;">map</mat-icon>
+          {{element.Address}}, {{element.Suburb}}</a></p>
+          <h3>Health Advice</h3>
+        <div [innerHtml]="element.HealthAdviceHTML"></div>
+    
+      </mat-expansion-panel>
+    
+    </div>
+    
+    <!-- 
+    <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8" style="width:100%;">
+    
+    
+    
+            <ng-container matColumnDef="Distance">
+              <th mat-header-cell *matHeaderCellDef  mat-sort-header> Distance </th>
+              <td mat-cell *matCellDef="let element"> {{element.Distance | number:'1.1-1'}}km </td>
+            </ng-container>
+    
+    
+      <ng-container matColumnDef="Venue">
+        <th mat-header-cell *matHeaderCellDef> Venue </th>
+        <td mat-cell *matCellDef="let element"> {{element.Venue}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="Suburb">
+        <th mat-header-cell *matHeaderCellDef> Suburb </th>
+        <td mat-cell *matCellDef="let element"> {{element.Suburb}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Date">
+        <th mat-header-cell *matHeaderCellDef> Date and time of exposure </th>
+        <td mat-cell *matCellDef="let element"> {{element.Time}}<br/>{{element.Date | date : "EEE, d MMM"}}</td>
+      </ng-container>
+    
+       <ng-container matColumnDef="Advice">
+        <th mat-header-cell *matHeaderCellDef> Health advice </th>
+        <td mat-cell *matCellDef="let element" [innerHtml]="element.HealthAdviceHTML"></td>
+      </ng-container>
+       
+    
+       <ng-container matColumnDef="Map">
+        <th mat-header-cell *matHeaderCellDef> Address / Map </th>
+        <td mat-cell *matCellDef="let element"></td>
+      </ng-container>
+    
+      <ng-container matColumnDef="LastUpdatedDate">
+        <th mat-header-cell *matHeaderCellDef> Last Updated </th>
+        <td mat-cell *matCellDef="let element">{{element.LastUpdatedDate  | dateAgo}}</td>
+      </ng-container>
+    
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="9999">
+          <span *ngIf="currentLat==0">Click "Search my Location" or select a postcode to search for local covid cases</span>
+          <span *ngIf="currentLat!=0">No locations found within {{radius}}km</span>
+          
+        </td>
+      </tr>
+    
+    </table> -->
+    
+    <p>&nbsp;</p>
+    <p>Case data is live from <a href="https://data.nsw.gov.au/nsw-covid-19-data/case-locations" target="_blank">Data.NSW</a></p>
