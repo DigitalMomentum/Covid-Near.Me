@@ -12,15 +12,15 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import {MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
+//import {MatTableModule} from '@angular/material/table';
+//import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatSelectModule} from '@angular/material/select';
-import { FlexLayoutModule } from '@angular/flex-layout';
+//import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
-import {MatCardModule} from '@angular/material/card';
+//import {MatCardModule} from '@angular/material/card';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
 
@@ -78,14 +78,14 @@ const appRoutes: Routes = [
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    MatTableModule,
-    MatPaginatorModule,
+   // MatTableModule,
+    //MatPaginatorModule,
     MatSortModule,
     MatSelectModule,
-    FlexLayoutModule,
+   // FlexLayoutModule,
     MatInputModule,
     MatAutocompleteModule,
-    MatCardModule,
+   // MatCardModule,
     MatExpansionModule,
     MatDividerModule,
 
