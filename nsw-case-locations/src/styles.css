@@ -1,12 +1,73 @@
 /* You can add global styles to this file, and also import other style files */
 @import "css/flexboxgrid/dist/flexboxgrid.min.css";
+/*#region COLOURS */
+/*#endregion */
+/*#region FONTS */
+/*#endregion */
+.mat-toolbar.mat-primary {
+  background: #443931 !important;
+}
+.mat-h2,
+.mat-title,
+.mat-typography h2 {
+  font-size: 19px;
+  color: #635147;
+}
+.mat-expansion-panel {
+  color: #635147;
+}
+.mat-flat-button.mat-primary,
+.mat-raised-button.mat-primary,
+.mat-fab.mat-primary,
+.mat-mini-fab.mat-primary {
+  background-color: #f1592a;
+}
+.mat-form-field.mat-focused .mat-form-field-label {
+  color: #f1592a;
+}
+body,
+form {
+  font: 400 14px / 20px Roboto, "Helvetica Neue", sans-serif;
+  color: #635147;
+}
+a {
+  color: #635147;
+  font-weight: 500;
+  transition: color ease-in-out 0.2s;
+}
+a:hover {
+  color: #f1592a;
+}
+strong {
+  font-weight: 500;
+}
+h1 {
+  font-family: Cutive, Courier, 'Courier New', Georgia, serif !important;
+  color: #f1592a;
+  font-size: 30px;
+}
+h2 {
+  font-family: Cutive, Courier, 'Courier New', Georgia, serif;
+  font-size: 25px;
+}
+label {
+  font-weight: 600;
+}
 html,
 body {
   height: 100%;
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f5f1eb;
+}
+.page {
+  min-height: calc(100vh - 64px - 117px);
+  max-width: 1200px;
+}
+.container-fluid {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 .alert {
   display: block;
@@ -14,9 +75,9 @@ body {
   border-radius: 3px;
 }
 .alert.info {
-  border: 1px solid #3f51b5;
-  background-color: #3f51b521;
-  color: #3f51b5;
+  border: 1px solid #275DF1;
+  background-color: #e7edfd;
+  color: #275DF1;
 }
 .locationPanels {
   display: grid;
@@ -46,7 +107,7 @@ body {
   padding-bottom: 10px;
 }
 .footer {
-  border-top: 1px solid #333;
+  border-top: 1px solid #635147;
   padding: 20px 0%;
   margin: 20px 2%;
 }

@@ -9,6 +9,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { Observable } from 'rxjs';
 import { map, startWith, switchMap } from 'rxjs/operators';
 import { SuburbData } from '../../models/suburbData.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-search-locations',
@@ -25,7 +26,7 @@ export class SearchLocationsComponent implements OnInit {
   lastDataRefresh!: Date;
 
   distanceField = new FormControl();
-  radius = "5";
+  radius = "10";
 
   currentLat = 0;
   currentLng = 0;
@@ -42,10 +43,12 @@ export class SearchLocationsComponent implements OnInit {
   ];
   filteredOptions!: Observable<SuburbData[]>;
 
-  constructor(private caseLocations: LocationsService, private geoLocationService: GeoLocationService){
+  constructor(private caseLocations: LocationsService, private geoLocationService: GeoLocationService, private route: ActivatedRoute){
 
     this.geoLocationService.getPostcodes().subscribe((data)=>{
       this.options = data;
+
+    
     });
 
    
@@ -53,6 +56,7 @@ export class SearchLocationsComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("test")
     this.filteredOptions = this.myControl.valueChanges
     .pipe(
       startWith(''),
@@ -88,21 +92,44 @@ export class SearchLocationsComponent implements OnInit {
        
 
         this.locations = data;
+        console.log(this.locations)
 
-        var settings:any = localStorage.getItem("searchSettings");
-        if(settings != null){
-          settings = JSON.parse(settings);
-          this.radius = settings.radius;
-          this.sortBy = settings.sortBy;
-          this.searchType =settings.searchType;
-          this.selectedPostcode =settings.selectedPostcode;
+        this.route.params.subscribe( params => {
+        
+          console.log(params) ;
+         
 
-          if(this.searchType == "myLocation"){
-            this.onGpsSearch();
-          }else if(this.searchType == "postcode"){
-            this.onPostcodeSelected(this.selectedPostcode);
+          if(params.suburb){
+            let routeSuburb = params.suburb.toLowerCase()
+            this.options.forEach((item)=>{
+             
+                if(item.locality.toLowerCase() == routeSuburb){
+                  this.searchType ="postcode";
+                  this.selectedPostcode = item;
+                  this.onPostcodeSelected(this.selectedPostcode);
+                }
+            })
+          }else{
+
+          var settings:any = localStorage.getItem("searchSettings");
+          if(settings != null){
+            settings = JSON.parse(settings);
+            this.radius = settings.radius;
+            this.sortBy = settings.sortBy;
+            this.searchType =settings.searchType;
+            this.selectedPostcode =settings.selectedPostcode;
+  
+            if(this.searchType == "myLocation"){
+              this.onGpsSearch();
+            }else if(this.searchType == "postcode"){
+              this.onPostcodeSelected(this.selectedPostcode);
+            }
           }
         }
+        });
+  
+
+       
       
        // this.updateDistances(pos.coords.latitude, pos.coords.longitude);
         //this.dataSource.data = this.locations.filter(item => item.Distance < +this.radius);

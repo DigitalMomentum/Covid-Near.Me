@@ -1,0 +1,40 @@
+@import "const";
+
+body, form {
+	.fontBody();
+	color:@brown;
+}
+
+a {
+	color: @brown;
+	font-weight: 500;
+	transition: color ease-in-out 0.2s;
+	&:hover{
+		color:@orange;
+	}
+}
+
+strong{
+	font-weight:500;
+}
+
+h1{
+	.fontHeading !important;
+	color:@orange;
+
+	font-size:30px;
+
+
+}
+
+
+h2 {
+	.fontHeading;
+	//color: @darkBrown;
+	font-size: 25px;
+}
+
+label{
+	font-weight:600;
+}
+

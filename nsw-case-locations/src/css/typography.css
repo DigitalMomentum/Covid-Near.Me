@@ -1,0 +1,32 @@
+/*#region COLOURS */
+/*#endregion */
+/*#region FONTS */
+/*#endregion */
+body,
+form {
+  font: 400 14px / 20px Roboto, "Helvetica Neue", sans-serif;
+  color: #635147;
+}
+a {
+  color: #635147;
+  font-weight: 500;
+  transition: color ease-in-out 0.2s;
+}
+a:hover {
+  color: #f1592a;
+}
+strong {
+  font-weight: 500;
+}
+h1 {
+  font-family: Cutive, Courier, 'Courier New', Georgia, serif !important;
+  color: #f1592a;
+  font-size: 30px;
+}
+h2 {
+  font-family: Cutive, Courier, 'Courier New', Georgia, serif;
+  font-size: 25px;
+}
+label {
+  font-weight: 600;
+}

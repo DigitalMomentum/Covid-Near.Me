@@ -1,8 +1,14 @@
 
-<div class="container" >
-    <div style="padding:30px">
-    <h1>Search NSW COVID-19 case locations closest to you.</h1>
-    <p>The search uses live data directly from the <a href="https://data.nsw.gov.au/nsw-covid-19-data/case-locations" target="_blank">NSW Government</a>, showing locations with their distance from you.</p>
+<div class="page container-fluid" >
+    <div style="padding:30px 0;">
+    <h1 *ngIf="!selectedPostcode">Search NSW COVID-19 case locations closest to you.</h1>
+    <h1 *ngIf="selectedPostcode">Search COVID-19 case locations in {{selectedPostcode.locality}} NSW {{selectedPostcode.postcode}}.</h1>
+    <p>The search uses live data directly from the <a href="https://data.nsw.gov.au/nsw-covid-19-data/case-locations" target="_blank">NSW Government</a>, showing locations of concern
+      
+     <span *ngIf="!selectedPostcode"> with their distance from you.</span>
+     <span *ngIf="selectedPostcode"> that are near {{selectedPostcode.locality}} NSW {{selectedPostcode.postcode}}.</span>
+    
+    </p>
         <h3>Filters:</h3>
     
     <mat-form-field appearance="fill" style="margin-right:10px;">
@@ -48,12 +54,12 @@
       </mat-autocomplete>
     </mat-form-field>
     
-    
+    <p>View our <a href="/nsw">NSW Locations</a> page to see all suburbs, towns and locations that we cover</p>
     <!-- <span *ngIf="selectedPostcode">{{selectedPostcode.value.locality}}</span> -->
     
     
-    <div *ngIf="currentLat==0 && locationsFiltered.length == 0" class="alert info">Click "Search my Location" or select a postcode to search for local covid cases</div>
-    <div *ngIf="currentLat!=0 && locationsFiltered.length == 0" class="alert info">No locations found within {{radius}}km</div>
+    <div *ngIf="currentLat==0 && locationsFiltered.length == 0" class="alert info" style="margin-top:30px;">Click "Search my Location" or select a postcode to search for local covid cases.</div>
+    <div *ngIf="currentLat!=0 && locationsFiltered.length == 0" class="alert info" style="margin-top:30px;"><strong>Great News!</strong> There have been no locations of concern in the last 14 days, within a {{radius}}km radius.</div>
     
     
     <div class="locationPanels">

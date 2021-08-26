@@ -1,0 +1,25 @@
+/*#region COLOURS */
+/*#endregion */
+/*#region FONTS */
+/*#endregion */
+.mat-toolbar.mat-primary {
+  background: #443931 !important;
+}
+.mat-h2,
+.mat-title,
+.mat-typography h2 {
+  font-size: 19px;
+  color: #635147;
+}
+.mat-expansion-panel {
+  color: #635147;
+}
+.mat-flat-button.mat-primary,
+.mat-raised-button.mat-primary,
+.mat-fab.mat-primary,
+.mat-mini-fab.mat-primary {
+  background-color: #f1592a;
+}
+.mat-form-field.mat-focused .mat-form-field-label {
+  color: #f1592a;
+}

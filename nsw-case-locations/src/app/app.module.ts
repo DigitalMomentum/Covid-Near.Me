@@ -29,6 +29,7 @@ import { SearchLocationsComponent } from './pages/search-locations/search-locati
 import { DisclaimerComponent } from './pages/disclaimer/disclaimer.component';
 import { PrivacyComponent } from './pages/privacy/privacy.component';
 import { SourcesComponent } from './pages/sources/sources.component';
+import { ListLocationsComponent } from './pages/list-locations/list-locations.component';
 
 
 const appRoutes: Routes = [
@@ -51,6 +52,9 @@ const appRoutes: Routes = [
   { path: 'Disclaimer',   component: DisclaimerComponent },
   { path: 'Privacy',   component: PrivacyComponent },
   { path: 'Sources',   component: SourcesComponent },
+  
+  { path: 'nsw',   component: ListLocationsComponent },
+  { path: 'nsw/:suburb',   component: SearchLocationsComponent },
   //{ path: '**', component: PageNotFoundComponent }
 ];
 
@@ -62,7 +66,8 @@ const appRoutes: Routes = [
     SearchLocationsComponent,
     DisclaimerComponent,
     PrivacyComponent,
-    SourcesComponent
+    SourcesComponent,
+    ListLocationsComponent
   ],
   imports: [
     RouterModule.forRoot(
