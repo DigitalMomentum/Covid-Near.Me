@@ -30,6 +30,8 @@ import { DisclaimerComponent } from './pages/disclaimer/disclaimer.component';
 import { PrivacyComponent } from './pages/privacy/privacy.component';
 import { SourcesComponent } from './pages/sources/sources.component';
 import { ListLocationsComponent } from './pages/list-locations/list-locations.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 const appRoutes: Routes = [
@@ -97,7 +99,13 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    OrderModule
+    OrderModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
