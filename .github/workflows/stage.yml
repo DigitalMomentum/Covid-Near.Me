@@ -34,7 +34,7 @@ jobs:
         run: |
           npm install
           npm install @angular/cli
-          ng build --output-path D:\Domains\DigitalMomentum\covid.mynew.site\
+          npm run build --output-path D:\Domains\DigitalMomentum\covid.mynew.site\
 
       # Runs a set of commands using the runners shell
       #- name: Run a multi-line script
