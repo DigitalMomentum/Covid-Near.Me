@@ -33,7 +33,7 @@ jobs:
         working-directory:  nsw-case-locations
         run: |
           npm install
-          npm install -g @angular/cli
+          npm install @angular/cli
           ng build --output-path D:\Domains\DigitalMomentum\covid.mynew.site\
 
       # Runs a set of commands using the runners shell
