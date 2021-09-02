@@ -33,8 +33,8 @@ jobs:
         working-directory:  nsw-case-locations
         run: |
           npm install
-          npm install @angular/cli
-          npm run build --output-path D:\Domains\DigitalMomentum\covid.mynew.site\
+          #npm install @angular/cli
+          npm run build --output-path 'D:\Domains\DigitalMomentum\covid.mynew.site'
 
       # Runs a set of commands using the runners shell
       #- name: Run a multi-line script
